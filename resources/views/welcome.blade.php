@@ -99,13 +99,13 @@
             <pre style="text-align: left">
 {{ url('/[type]/[year]/[month]/[day]') }}
 
-type: jalali|gregorian
+type: jalali | gregorian
             </pre>
             <h2 style="text-align: right;  direction: rtl">مثال:</h2>
             <pre style="text-align: left">
-{{ url('/jalali/1398/11/22') }}
+{{ url('/jalali/1374/10/12') }}
 
-{{ url('/gregorian/2019/06/29') }}
+{{ url('/gregorian/1996/01/02') }}
             </pre>
         </div>
         <br><br><br>
