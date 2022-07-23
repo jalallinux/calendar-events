@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Collection;
-use Morilog\Jalali\CalendarUtils;
 use simplehtmldom\HtmlWeb;
 
 class JalaliEvents
@@ -12,9 +11,7 @@ class JalaliEvents
 
     public function fetchEvents(int $year, int $month, int $day = null): Collection
     {
-        [$year, $month, $day] = $this->toJalali($year, $month, $day);
         $date = $this->makeDateString($year, $month, $day);
-
         $client = new HtmlWeb();
         $html = $client->load(self::TIME_IR_BASE_URI . $date);
 
@@ -28,17 +25,6 @@ class JalaliEvents
                 'is_holiday' => $event->getAttribute('class') == 'eventHoliday',
             ];
         });
-    }
-
-    private function toJalali(int $year, int $month, int $day = null): array
-    {
-        if (!is_null($day)) {
-            [$year, $month, $day] = CalendarUtils::toJalali($year, $month, $day);
-        } else {
-            [$year, $month] = CalendarUtils::toJalali($year, $month, 1);
-        }
-
-        return [$year, $month, $day];
     }
 
     private function makeDateString(int $year, int $month, int $day = null, $splitter = '/'): string
